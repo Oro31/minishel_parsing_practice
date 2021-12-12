@@ -1,16 +1,15 @@
 #include "minishell.h"
 
+int	g_status;
+
 static void	ft_handler(int signum)
 {
-	int	i;
-	
 	if (signum == SIGINT)
 	{
-		i = 0;
-		rl_on_new_line();
-//		rl_replace_line("", 0);
-		rl_redisplay();
 		ft_print_str("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 		g_status = 1;
 	}
 }

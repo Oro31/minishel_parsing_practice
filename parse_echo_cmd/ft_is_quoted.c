@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 08:36:54 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/05 10:14:24 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/12 19:52:09 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_is_quote_close(char *line, int i, int ret_oq)
 	int	j;
 	
 	j = i;
-	while (line[j])
+	while (line[++j])
 	{
 		if (ret_oq == 1 && line[j] == S_QUOTE)
 			return (1);
@@ -71,7 +71,6 @@ int	ft_is_quote_close(char *line, int i, int ret_oq)
 			return (1);
 		else if (ret_oq == 3 && (line[j] == S_QUOTE || line[j] == D_QUOTE))
 			return (1);
-		j++;
 	}
 	return (0);
 }

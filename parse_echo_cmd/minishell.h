@@ -18,7 +18,7 @@
 # define S_QUOTE 39
 # define D_QUOTE 34
 
-int	g_status;
+extern int	g_status;
 
 typedef struct s_cmd	t_cmd;
 
@@ -54,10 +54,12 @@ int	ft_is_quote_close(char *line, int i, int ret_oq);
 char	**ft_double_realloc(char *str, char **split);
 char	*ft_realloc(char *str, char c);
 
-int	ft_is_pipe(char *line, int i, int j);
+int	ft_is_char_quoted(char *line, int i, int j, char c);
 char	**ft_pipe_split(char *rdline, int *k);
 
 int	ft_is_space(char *line, int i, int j);
 char	**ft_cmdline_split(char *line);
+
+char	*ft_parse_echo(t_cmd *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/09 11:19:47 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/12 18:05:22 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	ft_prompt(t_cmd **cmd)
 	char	**cmd_char;
 	char	**pipe_char;
 	char	*line;
-	int		i;
-	int		k;
+	char	*echo;
+	int	i;
+	int	k;
 
 	i = 0;
 	k = 0;
@@ -49,7 +50,9 @@ int	ft_prompt(t_cmd **cmd)
 			*cmd = ft_hadd_tolist_cmd(*cmd, cmd_char, (i % 1), i);
 			i++;
 		}
-		ft_print_list_cmd(*cmd);
+		echo = ft_parse_echo(*cmd);
+		printf("echo =%s\n", echo);
+//		ft_print_list_cmd(*cmd);
 	}
 	return (0);
 }

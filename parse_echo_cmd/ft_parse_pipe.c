@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_rdline.c                                  :+:      :+:    :+:   */
+/*   ft_parse_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/05 13:10:06 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/12 19:52:42 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_is_pipe(char *line, int i, int j)
+int	ft_is_char_quoted(char *line, int i, int j, char c)
 {
 	int ret;
 
 	ret = 0;
-	if (line[i] != '|')
+	if (line[i] != c)
 		return (0);
 	while (j < i && line[j] != S_QUOTE && line[j] != D_QUOTE)
 		j++;
@@ -49,7 +49,7 @@ char	**ft_pipe_split(char *rdline, int *k)
 	j = 0;
 	while (rdline[i])
 	{
-		if (ft_is_pipe(rdline, i, j))
+		if (ft_is_char_quoted(rdline, i, j, '|'))
 		{
 			(*k)++;
 			ret = ft_double_realloc(str, ret);
