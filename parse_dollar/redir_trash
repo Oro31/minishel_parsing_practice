@@ -1,0 +1,141 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_redir.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
+/*   Updated: 2021/12/16 13:12:47 by rvalton          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+static int	ft_init_redir_split(char ***ret, char **str, int *i, int *j)
+{
+	if (!ft_malloc_dblchar(ret, 1))
+		return (0);
+	if (!ft_malloc_splchar(str, 1))
+		return (0);
+	*i = -1;
+	*j = 0;
+	return (1);
+}
+
+static int	ft_is_redir(char c)
+{
+	return (c == '<' || c == '>');
+}
+
+static int	ft_is_redir_in_arg(char *arg)
+{
+	int	i;
+
+	i = -1;
+	while (arg[++i])
+	{
+//		write(1, "'", 1);
+//		write(1, &arg[i], 1);
+		if (ft_is_redir(arg[i]))
+		{
+//			write(1, "R", 1);
+			if (!ft_is_char_quoted(arg, i, 0, arg[i]))
+				return (1);
+		}
+	}
+	return (0);
+}
+
+static char	**ft_redir(char *arg)
+{
+	char	**ret;
+	char	*str;
+	int	i;
+	int	j;
+
+	if (!ft_init_redir_split(&ret, &str, &i, &j))
+		return (NULL);
+	while (arg[++i])
+	{
+		if (ft_is_redir(arg[i]))
+		{
+			if (!ft_is_char_quoted(arg, i, j, arg[i]))
+			{
+				if (str)
+					ret = ft_double_realloc(str, ret);
+				str = NULL;
+				str = ft_realloc(str, arg[i]);
+				ret = ft_double_realloc(str, ret);
+				str = NULL;
+				j = i + 1;
+			}
+			else
+				str = realloc(str, arg[i]);
+		}
+		else
+			str = ft_realloc(str, arg[i]);
+	}
+	return (ft_double_realloc(str, ret));
+}
+
+static	char	**ft_realloc_redir(char **redir, char **ret)
+{
+	char	**tmp;
+	int	nb;
+	int	i;
+
+	nb = -1;
+	while (redir[++nb]);
+	i = -1;
+	while (ret[++i]);
+	nb = nb + i;
+//	printf("%d\n", nb);
+	if (!ft_malloc_dblchar(&tmp, nb + 1))
+		return (NULL);
+	while (--nb >= i)
+		tmp[nb] = ft_str_copy(redir[nb - i]);
+	while (--nb >= 0)
+		tmp[nb] = ft_str_copy(ret[nb]);
+//	free(redir);
+//	free(ret);
+	return (tmp);
+}
+
+char	**ft_redir_split(char **argv)
+{
+	char	**ret;
+	char	**redir;
+	char	*str;
+	int		i;
+	int		j;
+
+	if (!ft_init_redir_split(&ret, &str, &i, &j))
+		return (NULL);
+	while (argv[++i])
+	{
+//		ft_print_str(argv[i]);
+//		write(1, "\\", 1);
+		if (!ft_is_redir_in_arg(argv[i]))
+		{
+			str = ft_str_copy(argv[i]);
+			printf("str=%s\n", str);
+			ret = ft_double_realloc(str, ret);
+		}
+		else
+		{
+//			write(1, "S", 1);
+			printf("redir=%s\n", argv[i]);
+			redir = ft_redir(argv[i]);
+			ret = ft_realloc_redir(redir, ret);
+		}
+		while (ret[j])
+		{
+			ft_print_str(ret[j]);
+			printf("j=%d\n", j);
+			j++;
+		}
+		j = 0;
+	}
+	return (ret);
+}
