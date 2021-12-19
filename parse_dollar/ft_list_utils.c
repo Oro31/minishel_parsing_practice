@@ -6,11 +6,13 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:57:41 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/16 01:55:58 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 15:53:48 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*return the number of element of a list of type t_cmd*/
 
 int	ft_size_list_cmd(t_cmd *list)
 {
@@ -28,6 +30,8 @@ int	ft_size_list_cmd(t_cmd *list)
 	}
 	return (i);
 }
+
+/*print in stdout what's contain a list of type t_cmd*/
 
 void	ft_print_list_cmd(t_cmd *list)
 {

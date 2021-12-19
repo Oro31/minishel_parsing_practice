@@ -6,11 +6,15 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 08:36:54 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/17 20:52:30 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 14:21:53 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*this static function try to know if the special char 
+$ is between double quotes,
+at these stage we already know thaat $ is between quotes*/
 
 static int	ft_is_double_quoted(char *line, int i)
 {
@@ -36,6 +40,9 @@ static int	ft_is_double_quoted(char *line, int i)
 		return (0);
 }
 
+/*this function try to know if the special char $ will be interpret as
+a special char or as a normal char*/
+
 int	ft_is_dollar(char *line, int i)
 {
 	if (line[i] == '$')
@@ -47,6 +54,9 @@ int	ft_is_dollar(char *line, int i)
 	return (0);
 }
 
+/*this function try to find the value of the environnement
+variable refered by the str stuck to the secial char $
+at these stage we know that the special char $ need to be interpreted*/
 
 char	*ft_get_dollar_value(char *str, int i)
 {
@@ -66,6 +76,10 @@ char	*ft_get_dollar_value(char *str, int i)
 		env_name[j - i - 1] = str[j];
 	return (find_env_value(env_name));
 }
+
+/*this function try to find the size of value of the environnement
+ variable refered by the str stuck to the special char $
+at these stage we know that the special char $ need to be interpreted*/
 
 int	ft_size_dollar(char *str, int i)
 {

@@ -6,11 +6,18 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 09:15:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/17 17:57:51 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 16:29:39 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*the function ft_cmdline_split is used to create a table of strings
+from a simple string, the separateur used is space,
+the separateur will be valid if it's not between quotes
+the simple string is freed at the end of the function
+the function return a table of strings
+that you will have to free before the end of your program*/
 
 static int	ft_init_cmdline_split(char ***ret, char **str, int *i, int *j)
 {
@@ -52,5 +59,6 @@ char	**ft_cmdline_split(char *line)
 		else
 			str = ft_realloc(str, line[i]);
 	}
+	free(line);
 	return (ft_double_realloc(str, ret));
 }

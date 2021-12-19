@@ -6,11 +6,14 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 02:04:56 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/16 13:13:28 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 14:32:59 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*these function add string to a table of string
+everything that is not returned is freed*/
 
 char	**ft_double_realloc(char *str, char **split)
 {
@@ -27,6 +30,9 @@ char	**ft_double_realloc(char *str, char **split)
 	free(split);
 	return (tmp);
 }
+
+/*these function add char to a string
+everything that is not returned is freed*/
 
 char	*ft_realloc(char *str, char c)
 {

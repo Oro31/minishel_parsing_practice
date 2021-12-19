@@ -6,13 +6,18 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 12:33:23 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/16 02:37:48 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 15:39:54 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_fill_clean_str(char **tmp, char *str)
+/*this set of function clean quotes from a table of string
+it only clean real quotes, not quotes that are consider as char
+the function ft_clean_cmdchar allocate memory with malloc
+you need to free it before exiting your program*/
+
+static void	ft_fill_clean_str(char **tmp, char *str)
 {
 	int	i;
 	int	j;
@@ -37,7 +42,7 @@ void	ft_fill_clean_str(char **tmp, char *str)
 	}
 }
 
-char	*ft_clean_str(char *str)
+static char	*ft_clean_str(char *str)
 {
 	char	*tmp;
 	int	i;
@@ -54,7 +59,7 @@ char	*ft_clean_str(char *str)
 		if (str[i] != S_QUOTE && str[i] != D_QUOTE)
 			j++;
 		else if (ft_is_quote_needed(str, i))
-				j++;
+			j++;
 		i++;
 	}
 	if (!ft_malloc_splchar(&tmp, j + 1))
@@ -75,6 +80,10 @@ char	**ft_clean_cmdchar(char **cmd_char)
 		return (NULL);
 	i = -1;
 	while (cmd_char[++i])
+	{
 		tmp[i] = ft_clean_str(cmd_char[i]);
+		free(cmd_char);
+	}
+	free(cmd_char);
 	return (tmp);
 }

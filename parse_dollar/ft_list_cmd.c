@@ -6,11 +6,14 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 14:05:31 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/13 01:21:11 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 15:50:59 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*this function is used to add a new element at the top
+of a list of type t_cmd, it returns the pointer to this new element*/
 
 t_cmd	*ft_hadd_tolist_cmd(t_cmd *list, char **split, int is_pipe, int pos)
 {
@@ -28,6 +31,9 @@ t_cmd	*ft_hadd_tolist_cmd(t_cmd *list, char **split, int is_pipe, int pos)
 	newelem->nxt = list;
 	return (newelem);
 }
+
+/*this function is used to add a new element at the end
+of a list of type t_cmd, it returns the pointer to the head of the list*/
 
 t_cmd	*ft_eadd_tolist_cmd(t_cmd *list, char **split, int is_pipe, int pos)
 {
@@ -55,6 +61,9 @@ t_cmd	*ft_eadd_tolist_cmd(t_cmd *list, char **split, int is_pipe, int pos)
 		return (list);
 	}
 }
+
+/*this function is used to free all elements of a listof type t_cmd
+everything that were allocated in each element are freed*/
 
 void	ft_free_list_cmd(t_cmd **list, int del)
 {

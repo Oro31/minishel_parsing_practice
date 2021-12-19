@@ -6,13 +6,16 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 08:36:54 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/14 13:21:13 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 15:45:46 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_new_quote(int ret, int which_q, int *lst_q)
+/*here is a set of function that try to know if a char is between quotes
+the function ft_is_char_quoted returns 1 if th char is between quotes*/
+
+static int	ft_new_quote(int ret, int which_q, int *lst_q)
 {
 	if (!ret)
 	{
@@ -33,7 +36,7 @@ int	ft_new_quote(int ret, int which_q, int *lst_q)
 	}
 }
 
-int	ft_is_quote_open(char *line, int i, int j)
+static int	ft_is_quote_open(char *line, int i, int j)
 {
 	int	ret;
 	int	lst_q;
@@ -51,7 +54,7 @@ int	ft_is_quote_open(char *line, int i, int j)
 	return (ret);
 }
 
-int	ft_is_quote_close(char *line, int i, int ret_oq)
+static int	ft_is_quote_close(char *line, int i, int ret_oq)
 {
 	int	j;
 	

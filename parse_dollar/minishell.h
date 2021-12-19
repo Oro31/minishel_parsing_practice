@@ -18,14 +18,6 @@
 # define S_QUOTE 39
 # define D_QUOTE 34
 
-enum e_redir
-{
-	RED_IN = 1,
-	RED_OUT,
-	RED_READ,
-	RED_APPEND
-};
-
 typedef struct s_cmd	t_cmd;
 
 struct	s_cmd
@@ -60,20 +52,12 @@ int	ft_strncomp(char *str, char *comp, int n);
 
 int	ft_is_quote_needed(char *arg, int i);
 
-int	ft_new_quote(int ret, int which_q, int *lst_q);
-int	ft_is_quote_open(char *line, int i, int ret_oq);
-int	ft_is_quote_close(char *line, int i, int ret_oq);
 int	ft_is_char_quoted(char *line, int i, int j, char c);
 
 char	**ft_pipe_split(char *rdline, int *k);
 
-int	ft_is_space(char *line, int i, int j);
 char	**ft_cmdline_split(char *line);
 
-char	**ft_redir_split(char **argv);
-
-void	ft_fill_clean_str(char **tmp, char *str);
-char	*ft_clean_str(char *str);
 char	**ft_clean_cmdchar(char **cmd_char);
 
 int	ft_is_dollar(char *line, int i);

@@ -6,11 +6,13 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:10:26 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/13 01:06:40 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 16:31:43 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*some functions to manipulate strings*/
 
 void	ft_print_str(char *str)
 {
@@ -37,6 +39,8 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
+/*thise function is very usefull in ft_double_realloc*/
 
 char	*ft_str_copy(char *str)
 {

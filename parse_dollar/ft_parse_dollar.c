@@ -6,11 +6,17 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 08:36:54 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/17 22:45:57 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 16:07:40 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*the function ft_dollar_parse is used to replace $abcd
+by the value of the the environnement variable abcd
+everything not returned is freed
+the function return a table of strings
+that you will have to free before the end of your program*/
 
 static int	ft_moove_index(char *str, int i)
 {
@@ -84,6 +90,10 @@ char	**ft_dollar_parse(char **cmd_char)
 		return (NULL);
 	i = -1;
 	while (cmd_char[++i])
+	{
 		tmp[i] = ft_interpret_dollar(cmd_char[i]);
+		free(cmd_char[i]);
+	}
+	free(cmd_char);
 	return (tmp);
 }

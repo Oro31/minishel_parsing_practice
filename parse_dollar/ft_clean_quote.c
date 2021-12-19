@@ -6,11 +6,16 @@
 /*   By: rvalton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 08:36:54 by rvalton           #+#    #+#             */
-/*   Updated: 2021/12/16 05:30:14 by rvalton          ###   ########.fr       */
+/*   Updated: 2021/12/19 15:39:02 by rvalton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*these set of functions is used to know if a quote
+is a quote or a simple char,
+the function ft_is_quote_needed return 1 if the quote
+need to be considered as a simple char*/
 
 static int	ft_is_quote(char c)
 {
